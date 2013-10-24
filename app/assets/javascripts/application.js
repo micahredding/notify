@@ -13,4 +13,56 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require_tree .
+
+
+// allows to load modal multiple times
+$(function () {
+    $("body").on("click", ".modal-link", function (event) {
+        event.preventDefault();
+        $targetModal = $($(this).attr('data-target'));
+        $targetModal.removeData("modal");
+        $targetModal.modal({remote: $(this).attr("href")});
+    });
+});
+
+// add loaded event to modal https://github.com/twbs/bootstrap/pull/6846
+(function () {
+    $.fn.jqueryLoad = $.fn.load;
+
+    $.fn.load = function (url, params, callback) {
+        var $this = $(this);
+        var cb = $.isFunction(params) ? params : callback || $.noop;
+        var wrapped = function (responseText, textStatus, XMLHttpRequest) {
+            cb(responseText, textStatus, XMLHttpRequest);
+            $this.trigger('loaded');
+        };
+
+        if ($.isFunction(params)) {
+            params = wrapped;
+        } else {
+            callback = wrapped;
+        }
+
+        $this.jqueryLoad(url, params, callback);
+
+        return this;
+    };
+})();
+
+$.fn.exists = function () {
+    return this.length !== 0;
+};
+
+// Regex escape
+RegExp.escape = function (text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
+
+$.ajax_eval = function (url, method, data) {
+    $.ajax({
+        type: method,
+        url: url,
+        data: data,
+        dataType: "script"
+    });
+};

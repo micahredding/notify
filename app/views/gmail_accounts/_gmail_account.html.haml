@@ -1,0 +1,10 @@
+%tr.gmail_account_row
+  %td
+    = gmail_account.email
+  %td
+    = gmail_account.active?
+  %td
+    -unless gmail_account.token
+      = link_to "Activate" , gmail_accounts_activate_path(:id => gmail_account.id) , :class => "btn btn-small btn-primary"
+  %td
+    = link_to "Delete" , gmail_account ,:remote => true ,:method => "delete" , :class => "btn btn-small btn-danger" , :confirm => "Are you sure ?"

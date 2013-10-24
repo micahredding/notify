@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @rule.name
+%p
+  %b Sender regex:
+  = @rule.sender_regex
+%p
+  %b Subject regex:
+  = @rule.subject_regex
+%p
+  %b Content regex:
+  = @rule.content_regex
+
+= link_to 'Edit', edit_rule_path(@rule) , :class => "btn"
+\|
+= link_to 'Back', rules_path ,  :class => "btn"

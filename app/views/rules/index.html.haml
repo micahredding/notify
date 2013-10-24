@@ -1,0 +1,25 @@
+%h1 Listing rules
+
+%table.table.table-condensed
+  %tr
+    %th Name
+    %th Sender regex
+    %th Subject regex
+    %th Content regex
+    %th
+    %th
+    %th
+
+  - @rules.each do |rule|
+    %tr
+      %td= rule.name
+      %td= rule.sender_regex
+      %td= rule.subject_regex
+      %td= rule.content_regex
+      %td= link_to 'Show', rule  , :class => "btn btn-primary"
+      %td= link_to 'Edit', edit_rule_path(rule)  , :class => "btn btn-primary"
+      %td= link_to 'Destroy', rule, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-danger"
+
+%br
+
+= link_to 'New Rule', new_rule_path , :class => "btn btn-primary"

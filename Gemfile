@@ -17,6 +17,10 @@ gem 'sidekiq', ">= 2.15.0"
 gem 'sidekiq-client-cli', ">= 0.1.3"
 gem 'airbrake'
 gem 'newrelic_rpm'
+gem 'gmail' , :github => "90seconds/gmail"
+gem 'draper'
+gem 'validates_email_format_of'
+gem "oauth2"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

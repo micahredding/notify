@@ -1,0 +1,22 @@
+#settings:after{
+  content: "Settings";
+}
+
+#gmail_accounts_container:after{
+  content: "Gmail Accounts";
+}
+
+#rules_container:after{
+  content: "Rules";
+}
+
+#gmail_accounts_container{
+  input{
+    margin-bottom: 0px;
+  }
+
+  #gmail_accounts_loading{
+    display: block;
+    margin: 0 auto;
+  }
+}

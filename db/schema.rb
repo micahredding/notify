@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131024144756) do
+ActiveRecord::Schema.define(:version => 20131024223939) do
+
+  create_table "email_filters", :force => true do |t|
+    t.integer  "rule_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gmail_accounts", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "email"
+    t.string   "token"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "refresh_token"
+  end
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -23,6 +39,15 @@ ActiveRecord::Schema.define(:version => 20131024144756) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "rules", :force => true do |t|
+    t.string   "name"
+    t.text     "sender_regex"
+    t.text     "subject_regex"
+    t.text     "content_regex"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

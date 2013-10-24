@@ -1,0 +1,3 @@
+$('.gmail_account_row').remove();
+$('#gmail_accounts_table tbody').append("<%=j render :partial => "gmail_accounts/gmail_accounts", :locals => { :gmail_accounts => @gmail_accounts }%>");
+$("#gmail_accounts_loading").hide();

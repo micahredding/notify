@@ -1,0 +1,10 @@
+= simple_form_for(@rule) do |f|
+  = f.error_notification
+
+  = f.input :name
+
+  = f.input :sender_regex,:input_html =>{ :cols => "72" ,:rows => "5"}
+  = f.input :subject_regex,:input_html =>{ :cols => "72" ,:rows => "5"}
+  = f.input :content_regex,:input_html =>{ :cols => "72" ,:rows => "5"}
+
+  = f.button :submit, :class => "btn btn-primary"
