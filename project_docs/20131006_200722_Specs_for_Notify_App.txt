@@ -1,0 +1,41 @@
+OVERVIEW:
+A Rails app with models including
+Users, Gmail Accounts, Emails, Notifications, Rules
+
+DATA MODELS AND FUNCTIONALITY:
+- User accounts
+	- Each account has multiple connected Gmail accounts
+	- Each account has multiple enabled Rules (see Rules, below)
+	- User will have an account administration page where they can edit basic info (contact email, name, password) and connect or disconnect Gmail accounts
+	- User will have a Dashboard page where they can view all current Notifications (see Notifications, below). Each Notification will link to its corresponding Email.
+- Gmail accounts
+	- Users will have to authorize access to each Gmail account
+	- Site will periodically scan those email accounts for new emails matching particular Rules (see Rules, below)
+	- and copy the matching emails into the database
+- Emails 
+	- Emails will store all email metadata and textual content
+	- Every email copied into the database will generate a corresponding Notification (see Notifications, below)
+- Notifications 
+	- The Notification will be a one-line summary of the corresponding Email, generated according to simple coded rules
+	- The Notification will remember what Gmail account and User it belongs to, and what Email it corresponds to
+	- The Notification will have a status of “Read” or “Unread”
+- Rules
+	- Each rule will consist of three Regex patterns
+	- to match against Sender, Subject, and Email content, respectively
+	- One, two, or three of those Regex patterns may be filled in, and thus active
+
+PRIMARY PAGES:
+- User Dashboard
+	- The Dashboard will consist of a list of Notifications, color-coded as “Read” or “Unread”
+	-  Notifications can be clicked to mark as “Read”, which will result in a background color change for that row.
+	- Each Notification will link to its corresponding Email
+- User Account Management Page
+	- Edit account info
+	- Connect or disconnect Gmail accounts
+	- Activate or Deactivate Rules
+- User signup page (front page)
+	- Initial account creation
+
+SECONDARY PAGES:
+- Individual Email Page
+  - Simply displays the contents of one Email
