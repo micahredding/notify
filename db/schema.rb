@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131024223939) do
+ActiveRecord::Schema.define(:version => 20131025224132) do
 
   create_table "email_filters", :force => true do |t|
     t.integer  "rule_id"
@@ -24,9 +24,12 @@ ActiveRecord::Schema.define(:version => 20131024223939) do
     t.integer  "user_id"
     t.string   "email"
     t.string   "token"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.string   "refresh_token"
+    t.integer  "last_mail_uid"
+    t.datetime "last_mail_date"
+    t.datetime "checked_at"
   end
 
   create_table "roles", :force => true do |t|

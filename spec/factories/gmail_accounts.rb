@@ -3,7 +3,6 @@
 FactoryGirl.define do
   factory :gmail_account do
     user_id 1
-    email "MyString"
-    token "MyString"
+    email "m@il.com"
   end
 end

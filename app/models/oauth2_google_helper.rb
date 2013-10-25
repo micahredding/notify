@@ -12,6 +12,10 @@ class Oauth2GoogleHelper
     get_client.auth_code.get_token(code, {:redirect_uri => ENV["GOOGLE_APP_REDIRECT_URI"], :token_method => :post})
   end
 
+  def self.get_new_access_token refresh_token
+    OAuth2::AccessToken.from_hash(get_client, :refresh_token => refresh_token).refresh!
+  end
+
   private
 
   def self.get_client
