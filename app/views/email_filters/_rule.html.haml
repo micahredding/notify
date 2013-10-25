@@ -1,0 +1,11 @@
+- rule_active = rule.active_for?(current_user)
+%tr.email_filter_row
+  %td
+    = rule.name
+  %td
+    = rule_active
+  %td.link
+    - if rule_active
+      = link_to "Deactivate", email_filters_deactivate_path(:id => rule.id), :remote => true, :method => :post, :class => "btn btn-warning"
+    - else
+      = link_to "Activate", email_filters_activate_path(:id => rule.id), :remote => true, :method => :post, :class => "btn btn-primary"

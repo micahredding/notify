@@ -5,4 +5,9 @@ class Rule < ActiveRecord::Base
   has_many :users, :through => :email_filters
 
   validates_presence_of :name
+
+  def active_for?(user)
+    user.rules.where(:id => id).any?
+  end
+
 end

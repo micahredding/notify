@@ -1,0 +1,3 @@
+$('.email_filter_row').remove();
+$('#email_filters_table tbody').append("<%=j render :partial => "email_filters/rules", :locals => { :rules => @rules }%>");
+$("#email_filters_loading").hide();

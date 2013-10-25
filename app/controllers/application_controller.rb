@@ -9,4 +9,11 @@ class ApplicationController < ActionController::Base
       redirect_to root_path, :alert => exception.message
     end
   end
+
+  def authorize_admin!
+    unless current_user.has_role?("admin")
+      redirect_to root_path, :alert => 'Not authorized as admin.'
+    end
+  end
+
 end

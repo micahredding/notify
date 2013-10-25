@@ -38,3 +38,13 @@
 
 .row-fluid
   .box#rules_container
+    %table.table.table-striped.table-bordered#email_filters_table{"data-url" => email_filters_path}
+      %thead
+        %tr
+          %th
+            Name
+          %th
+            Active
+          %th
+      %tbody
+    = loader_tag "email_filters_loading"
