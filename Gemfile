@@ -15,6 +15,7 @@ gem 'capistrano'
 gem 'whenever', :require => false
 gem 'sidekiq', ">= 2.15.0"
 gem 'sidekiq-client-cli', ">= 0.1.3"
+gem 'sinatra', require: false
 gem 'airbrake'
 gem 'newrelic_rpm'
 gem 'gmail' , :github => "90seconds/gmail"

@@ -1,4 +1,11 @@
+require 'sidekiq/web'
+
 Notify::Application.routes.draw do
+
+  admin_constraint = lambda { |request| request.env["warden"].authenticate? and request.env['warden'].user.has_role?(:admin)  }
+  constraints admin_constraint do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   post "email_filters/deactivate" => "email_filters#deactivate", :as => 'email_filters_deactivate'
   post "email_filters/activate" => "email_filters#activate", :as => 'email_filters_activate'
