@@ -2,9 +2,11 @@ class GmailAccount < ActiveRecord::Base
 
   CHECK_INTERVAL = 1.hour
 
-  attr_accessible :email, :token, :user_id, :refresh_token
+  attr_accessible :email, :token, :user_id, :refresh_token, :last_mail_uid, :last_mail_date
 
   belongs_to :user
+  has_many :emails, :dependent => :destroy
+  has_many :notifications, :dependent => :destroy
 
   validates :email, :email_format => {:message => 'is not a valid email address'}
 

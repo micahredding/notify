@@ -7,7 +7,8 @@ describe RulesChecker do
   let(:rule1) { double }
   let(:rule2) { double }
   let(:rules) { [rule1,rule2] }
-  let(:gmail_account) { double(:rules => rules) }
+  let(:user) {double(:rules => rules)}
+  let(:gmail_account) { double( :user => user) }
 
   it "2 ok" do
     SingleRuleChecker.stub(:new).with(rule1, message) { double(:check => true) }

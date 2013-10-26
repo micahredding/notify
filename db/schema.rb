@@ -11,13 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131025224132) do
+ActiveRecord::Schema.define(:version => 20131026204448) do
 
   create_table "email_filters", :force => true do |t|
     t.integer  "rule_id"
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "emails", :force => true do |t|
+    t.integer  "gmail_account_id"
+    t.datetime "date"
+    t.text     "subject"
+    t.string   "sender"
+    t.text     "body"
+    t.integer  "uid"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "gmail_accounts", :force => true do |t|
@@ -30,6 +41,16 @@ ActiveRecord::Schema.define(:version => 20131025224132) do
     t.integer  "last_mail_uid"
     t.datetime "last_mail_date"
     t.datetime "checked_at"
+  end
+
+  create_table "notifications", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "gmail_account_id"
+    t.integer  "email_id"
+    t.text     "body"
+    t.boolean  "read"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "roles", :force => true do |t|

@@ -2,7 +2,7 @@ class RulesChecker
 
   def initialize gmail_account
     @gmail_account = gmail_account
-    @rules = @gmail_account.rules.to_a
+    @rules = @gmail_account.user.rules.to_a
   end
 
   def check email

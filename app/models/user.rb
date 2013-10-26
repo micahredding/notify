@@ -15,4 +15,7 @@ class User < ActiveRecord::Base
   has_many :email_filters, :dependent => :destroy
   has_many :rules, :through => :email_filters
 
+  has_many :emails, :through => :gmail_accounts
+  has_many :notifications, :through => :gmail_accounts
+
 end

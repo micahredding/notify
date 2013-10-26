@@ -2,7 +2,10 @@ class EmailsFetcher
 
   def initialize gmail_account
     @gmail_account = gmail_account
+
     @rules_checker = RulesChecker.new(@gmail_account)
+    @emails_saver = EmailsSaver.new(@gmail_account)
+
     @filtered_emails = []
   end
 
@@ -10,7 +13,9 @@ class EmailsFetcher
     connect_gmail
     get_emails
     filter_emails
-    save_results
+    if save_results
+      save_last_email_data
+    end
   end
 
   private
@@ -30,11 +35,19 @@ class EmailsFetcher
   end
 
   def save_results
-    EmailsSaver.save(gmail_account, @filtered_emails)
+    @emails_saver.save(@filtered_emails)
+  end
+
+  def save_last_email_data
+    last_email = @emails.last
+
+    return unless last_email
+
+    @gmail_account.update_attributes(:last_mail_uid => last_email.uid, :last_mail_date => last_email.message.date)
   end
 
   def start_date
-    @gmail_account.last_mail_date - 1.day
+    @gmail_account.last_mail_date ? (@gmail_account.last_mail_date - 1.day) : nil
   end
 
   def start_uid
