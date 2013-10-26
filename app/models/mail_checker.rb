@@ -7,8 +7,9 @@ class MailChecker
   def check
     refresh_access_tokens
     get_gmail_account
+    get_emails
+    save_emails_and_notifications
   end
-
 
   private
 
@@ -18,6 +19,10 @@ class MailChecker
 
   def get_gmail_account
     @gmail_account = GmailAccount.find(@gmail_account_id)
+  end
+
+  def get_emails
+    @emails = EmailsFetcher.new(@gmail_account).fetch
   end
 
 end
