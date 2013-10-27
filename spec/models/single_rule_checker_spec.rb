@@ -12,7 +12,7 @@ describe SingleRuleChecker do
 
     context "single part message" do
 
-      let(:message) { double(:multipart? => false, :from => [email_address], :subject => subject, :body => body) }
+      let(:message) { double(:multipart? => false, :from => [email_address], :subject => subject, :body => double(:decoded => body)) }
 
       it "ok" do
         rule.sender_regex = "(mike|john)@yahoo"
@@ -41,7 +41,7 @@ describe SingleRuleChecker do
     context "multipart message" do
 
       let(:message) { double(:multipart? => true, :from => [email_address], :subject => subject,
-                             :parts => [double(:body => body), double(:body => body2)]) }
+                             :parts => [double(:body => double(:decoded => body)), double(:body => double(:decoded => body2))]) }
 
       it "ok" do
         rule.sender_regex = "(mike|john)@yahoo"

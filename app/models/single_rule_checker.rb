@@ -44,7 +44,7 @@ class SingleRuleChecker
   end
 
   def check_body(body)
-    Regexp.new(@rule.content_regex).match(body)
+    Regexp.new(@rule.content_regex).match(body.decoded)
   end
 
 end
