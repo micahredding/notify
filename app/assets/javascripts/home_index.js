@@ -1,5 +1,9 @@
 $(function () {
     refresh();
+
+    $("#notifications_table").on("click", ".email_link", function () {
+        window.open($(this).parent().attr("data-url"), '_blank');
+    });
 });
 
 function refresh() {

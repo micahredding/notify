@@ -1,8 +1,8 @@
 class GmailAccount < ActiveRecord::Base
 
-  CHECK_INTERVAL = 1.hour
+  CHECK_INTERVAL = 30.minutes
 
-  attr_accessible :email, :token, :user_id, :refresh_token, :last_mail_uid, :last_mail_date ,:checked_at
+  attr_accessible :email, :token, :user_id, :refresh_token, :last_mail_uid, :last_mail_date, :checked_at
 
   belongs_to :user
   has_many :emails, :dependent => :destroy

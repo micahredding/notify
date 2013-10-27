@@ -1,7 +1,7 @@
-%tr{:class => "notification_row #{notification.read_status}"}
-  %td
+%tr{:class => "notification_row #{notification.read_status}" , "data-url" => email_path(notification.email_id)}
+  %td.email_link
     = notification.date
-  %td
+  %td.email_link
     = notification.body
   %td.link
     -unless notification.read

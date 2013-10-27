@@ -15,6 +15,7 @@ gem 'capistrano'
 gem 'whenever', :require => false
 gem 'sidekiq', ">= 2.15.0"
 gem 'sidekiq-client-cli', ">= 0.1.3"
+gem 'sidekiq-failures'
 gem 'sinatra', require: false
 gem 'airbrake'
 gem 'newrelic_rpm'
@@ -22,6 +23,7 @@ gem 'gmail' , :github => "90seconds/gmail"
 gem 'draper'
 gem 'validates_email_format_of'
 gem "oauth2"
+gem "slim"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
