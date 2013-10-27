@@ -27,11 +27,11 @@ class EmailsSaver
   private
 
   def save_email
-    @gmail_account.emails.create(:date => @email.message.date, :subject => @email.message.subject, :sender => email_sender, :uid => @email.uid)
+    @gmail_account.emails.create(:date => email_date, :subject => email_subject, :sender => email_sender, :uid => @email.uid)
   end
 
   def save_notification db_email_id
-    @gmail_account.notifications.create(:user_id => @user_id, :email_id => db_email_id, :body => notification_body)
+    @gmail_account.notifications.create(:date => email_date, :user_id => @user_id, :email_id => db_email_id, :body => notification_body)
   end
 
   def notification_body
@@ -40,6 +40,14 @@ class EmailsSaver
 
   def email_sender
     @email.message.from[0] if (@email.message.from && @email.message.from.any?)
+  end
+
+  def email_subject
+    @email.message.subject
+  end
+
+  def email_date
+    @email.message.date
   end
 
 end

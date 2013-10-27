@@ -1,0 +1,18 @@
+= javascript_include_tag "home_index"
+
+%h2
+  Dashboard
+
+.row-fluid
+  .span12
+    .box#notifications_container
+      %table.table.table-bordered#notifications_table{"data-url" => notifications_path}
+        %thead
+          %tr
+            %th
+              Date
+            %th
+              Notification
+            %th
+        %tbody
+      = loader_tag "notifications_loading"

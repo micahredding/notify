@@ -1,0 +1,3 @@
+$('.notification_row').remove();
+$('#notifications_table tbody').append("<%=j render :partial => "notifications/notifications", :locals => { :notifications => @notifications }%>");
+$("#notifications_loading").hide();

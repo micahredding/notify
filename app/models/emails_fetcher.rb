@@ -32,6 +32,8 @@ class EmailsFetcher
     @emails.each do |email|
       @filtered_emails << email if @rules_checker.check(email)
     end
+
+    Rails.logger.info "Gmail Account #{@gmail_account.id}: found "
   end
 
   def save_results

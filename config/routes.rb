@@ -2,10 +2,15 @@ require 'sidekiq/web'
 
 Notify::Application.routes.draw do
 
-  admin_constraint = lambda { |request| request.env["warden"].authenticate? and request.env['warden'].user.has_role?(:admin)  }
+  admin_constraint = lambda { |request| request.env["warden"].authenticate? and request.env['warden'].user.has_role?(:admin) }
   constraints admin_constraint do
     mount Sidekiq::Web => '/sidekiq'
   end
+
+  resources :emails
+
+  post "notifications/read" => "notifications#read", :as => 'notifications_read'
+  resources :notifications
 
   post "email_filters/deactivate" => "email_filters#deactivate", :as => 'email_filters_deactivate'
   post "email_filters/activate" => "email_filters#activate", :as => 'email_filters_activate'
@@ -25,4 +30,5 @@ Notify::Application.routes.draw do
 
   devise_for :users
   resources :users
+
 end

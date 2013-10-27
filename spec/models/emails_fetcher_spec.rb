@@ -40,12 +40,14 @@ describe EmailsFetcher do
     end
 
     it "ok" do
-      emails_saver.should_receive(:save).with([email2]) { true }
+      Timecop.freeze do
+        emails_saver.should_receive(:save).with([email2]) { true }
 
-      EmailsFetcher.new(gmail_account).fetch
+        EmailsFetcher.new(gmail_account).fetch
 
-      gmail_account.reload.last_mail_uid.should eq email3.uid
-      gmail_account.last_mail_date.should eq new_last_mail_date
+        gmail_account.reload.last_mail_uid.should eq email3.uid
+        gmail_account.last_mail_date.should eq new_last_mail_date
+      end
     end
 
     it "save issue" do

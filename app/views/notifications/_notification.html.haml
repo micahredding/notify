@@ -1,0 +1,8 @@
+%tr{:class => "notification_row #{notification.read_status}"}
+  %td
+    = notification.date
+  %td
+    = notification.body
+  %td.link
+    -unless notification.read
+      = link_to "Mark as read", notifications_read_path(:id => notification.id) , :class => "btn btn-small btn-primary" , :remote => true , :method => :post
