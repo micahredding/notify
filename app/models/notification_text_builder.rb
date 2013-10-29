@@ -16,7 +16,7 @@ class NotificationTextBuilder
 
       result = eval("\"" + notification_template + "\"")
     rescue StandardError => ex
-      Rails.logger.error "Failed to build notification text for email ##{@email.uid}, gmail account ##{@gmail_account_id} : #{ex.message}"
+      Rails.logger.error "Failed to build notification text for email ##{@email.uid}, gmail account ##{@gmail_account_id}, rule ##{@rule.id} : #{ex.message}"
     end
 
     result

@@ -5,7 +5,8 @@ describe NotificationTextBuilder do
   context "builds" do
 
     let(:notification_template) { 'New comments from #{m_sender[:name]}, #{m_subject[:number]} to be exact' }
-    let(:rule) { double(:notification_text => notification_template) }
+    let(:rule_id) { 4 }
+    let(:rule) { double(:notification_text => notification_template, :id => rule_id) }
 
     let(:m_sender) { Regexp.new("(?<name>.+)@yahoo\.com").match("mike@yahoo.com") }
     let(:m_subject) { Regexp.new("(?<number>\\d+) of comments on your post").match("11 of comments on your post") }
