@@ -6,7 +6,7 @@ class EmailsFetcher
     @rules_checker = RulesChecker.new(@gmail_account)
     @emails_saver = EmailsSaver.new(@gmail_account)
 
-    @filtered_emails = []
+    @matched_emails = []
   end
 
   def fetch
@@ -30,14 +30,15 @@ class EmailsFetcher
 
   def filter_emails
     @emails.each do |email|
-      @filtered_emails << email if @rules_checker.check(email)
+      matched_email = @rules_checker.check(email)
+      @matched_emails << matched_email if matched_email
     end
 
     Rails.logger.info "Gmail Account #{@gmail_account.id}: found "
   end
 
   def save_results
-    @emails_saver.save(@filtered_emails)
+    @emails_saver.save(@matched_emails)
   end
 
   def save_last_email_data

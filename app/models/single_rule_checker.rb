@@ -1,11 +1,24 @@
 class SingleRuleChecker
 
-  def initialize rule, message
-    @rule, @message = rule, message
+  def initialize rule, email
+    @rule = rule
+    @message = email.message
+    @matched_email = MatchedEmail.new(email)
   end
 
   def check
+    return unless check_all_fields
+
+    build_notification_text
+    @matched_email if @matched_email.notification_text
+  end
+
+  def check_all_fields
     check_sender && check_subject && check_content
+  end
+
+  def build_notification_text
+    @matched_email.notification_text = NotificationTextBuilder.new(@rule, @matched_email).build
   end
 
   private
@@ -14,13 +27,17 @@ class SingleRuleChecker
     return true unless @rule.sender_regex.present?
 
     sender_email_address = @message.from[0] if (@message.from && @message.from.any?)
-    Regexp.new(@rule.sender_regex).match(sender_email_address)
+    @matched_email.m_sender = Regexp.new(@rule.sender_regex).match(sender_email_address)
+
+    true if @matched_email.m_sender
   end
 
   def check_subject
     return true unless @rule.subject_regex.present?
 
-    Regexp.new(@rule.subject_regex).match(@message.subject)
+    @matched_email.m_subject = Regexp.new(@rule.subject_regex).match(@message.subject)
+
+    true if @matched_email.m_subject
   end
 
   def check_content
@@ -44,7 +61,8 @@ class SingleRuleChecker
   end
 
   def check_body(body)
-    Regexp.new(@rule.content_regex).match(body.decoded)
+    @matched_email.m_content = Regexp.new(@rule.content_regex).match(body.decoded)
+    true if @matched_email.m_content
   end
 
 end

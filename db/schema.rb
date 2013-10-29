@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131027002530) do
+ActiveRecord::Schema.define(:version => 20131028134216) do
 
   create_table "email_filters", :force => true do |t|
     t.integer  "rule_id"
@@ -70,8 +70,9 @@ ActiveRecord::Schema.define(:version => 20131027002530) do
     t.text     "sender_regex"
     t.text     "subject_regex"
     t.text     "content_regex"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.text     "notification_text"
   end
 
   create_table "users", :force => true do |t|

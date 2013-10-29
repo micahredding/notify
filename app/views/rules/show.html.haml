@@ -12,6 +12,9 @@
 %p
   %b Content regex:
   = @rule.content_regex
+%p
+  %b Notification text:
+  = @rule.notification_text
 
 = link_to 'Edit', edit_rule_path(@rule) , :class => "btn"
 \|

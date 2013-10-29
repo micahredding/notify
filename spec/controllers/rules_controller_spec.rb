@@ -9,7 +9,7 @@ describe RulesController do
     sign_in user
   end
 
-  let(:valid_attributes) { { "name" => "MyString" } }
+  let(:valid_attributes) { { "name" => "MyString" , "notification_text" => "Text" } }
 
   let(:valid_session) { {} }
 

@@ -6,19 +6,20 @@ class RulesChecker
   end
 
   def check email
-    results = false
+    matched_email = nil
 
-    @message = email.message
+    @email = email
 
     @rules.each do |rule|
-      return true if check_rule(rule)
+      matched_email = check_rule(rule)
+      break if matched_email
     end
 
-    results
+    matched_email
   end
 
   def check_rule rule
-    SingleRuleChecker.new(rule, @message).check
+    SingleRuleChecker.new(rule, @email).check
   end
 
 end

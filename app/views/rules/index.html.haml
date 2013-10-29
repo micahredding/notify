@@ -6,6 +6,7 @@
     %th Sender regex
     %th Subject regex
     %th Content regex
+    %th Notification text
     %th
     %th
     %th
@@ -16,6 +17,7 @@
       %td= rule.sender_regex
       %td= rule.subject_regex
       %td= rule.content_regex
+      %td= rule.notification_text
       %td= link_to 'Show', rule  , :class => "btn btn-primary"
       %td= link_to 'Edit', edit_rule_path(rule)  , :class => "btn btn-primary"
       %td= link_to 'Destroy', rule, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-danger"

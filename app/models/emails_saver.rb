@@ -27,15 +27,17 @@ class EmailsSaver
   private
 
   def save_email
-    @gmail_account.emails.create(:date => email_date, :subject => email_subject, :sender => email_sender, :uid => @email.uid)
+    @gmail_account.emails.create(:date => email_date, :subject => email_subject,
+                                 :sender => email_sender, :body => email_body, :uid => @email.uid)
   end
 
   def save_notification db_email_id
-    @gmail_account.notifications.create(:date => email_date, :user_id => @user_id, :email_id => db_email_id, :body => notification_body)
+    @gmail_account.notifications.create(:date => email_date, :user_id => @user_id,
+                                        :email_id => db_email_id, :body => notification_body)
   end
 
   def notification_body
-    @email.message.subject
+    @email.notification_text
   end
 
   def email_sender
@@ -48,6 +50,10 @@ class EmailsSaver
 
   def email_date
     @email.message.date
+  end
+
+  def email_body
+    EmailBodyBuilder.new(@email).build
   end
 
 end

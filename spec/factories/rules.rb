@@ -3,5 +3,6 @@
 FactoryGirl.define do
   factory :rule do
     name "New Rule"
+    notification_text "This is a notification"
   end
 end

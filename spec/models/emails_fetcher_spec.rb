@@ -15,6 +15,8 @@ describe EmailsFetcher do
   let(:email3) { double(:uid => 448, :message => double(:date => new_last_mail_date)) }
   let(:emails) { [email1, email2, email3] }
 
+  let(:matched_email2) {double}
+
   let(:email) { "m@il.com" }
   let(:token) { "C14652" }
   let(:last_mail_date) { Time.local(2013, 8, 2, 5, 45) }
@@ -29,8 +31,8 @@ describe EmailsFetcher do
   context "fetch" do
 
     before do
-      rules_checker.stub(:check).with(email2) { true }
-      rules_checker.stub(:check).with(email3) { false }
+      rules_checker.stub(:check).with(email2) { matched_email2 }
+      rules_checker.stub(:check).with(email3) { nil }
 
       RulesChecker.stub(:new).with(gmail_account) { rules_checker }
       EmailsSaver.stub(:new).with(gmail_account) { emails_saver }
@@ -41,7 +43,7 @@ describe EmailsFetcher do
 
     it "ok" do
       Timecop.freeze do
-        emails_saver.should_receive(:save).with([email2]) { true }
+        emails_saver.should_receive(:save).with([matched_email2]) { true }
 
         EmailsFetcher.new(gmail_account).fetch
 
@@ -51,7 +53,7 @@ describe EmailsFetcher do
     end
 
     it "save issue" do
-      emails_saver.should_receive(:save).with([email2]) { false }
+      emails_saver.should_receive(:save).with([matched_email2]) { false }
 
       EmailsFetcher.new(gmail_account).fetch
 
