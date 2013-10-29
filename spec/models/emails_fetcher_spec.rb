@@ -37,7 +37,7 @@ describe EmailsFetcher do
       RulesChecker.stub(:new).with(gmail_account) { rules_checker }
       EmailsSaver.stub(:new).with(gmail_account) { emails_saver }
 
-      inbox.stub(:emails).with(:all, :after => (last_mail_date - 1.day)) { emails }
+      inbox.stub(:emails).with(:all, :after => (last_mail_date )) { emails }
       Gmail.stub(:connect).with(:xoauth2, email, token) { gmail }
     end
 

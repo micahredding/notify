@@ -50,7 +50,7 @@ class EmailsFetcher
   end
 
   def start_date
-    @gmail_account.last_mail_date ? (@gmail_account.last_mail_date - 1.day) : @gmail_account.created_at
+    @gmail_account.last_mail_date ? @gmail_account.last_mail_date : @gmail_account.created_at
   end
 
   def start_uid
