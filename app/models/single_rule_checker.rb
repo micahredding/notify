@@ -1,9 +1,10 @@
 class SingleRuleChecker
 
-  def initialize rule, email
+  def initialize rule, email, gmail_account_id
     @rule = rule
     @message = email.message
     @matched_email = MatchedEmail.new(email)
+    @gmail_account_id = gmail_account_id
   end
 
   def check
@@ -18,7 +19,7 @@ class SingleRuleChecker
   end
 
   def build_notification_text
-    @matched_email.notification_text = NotificationTextBuilder.new(@rule, @matched_email).build
+    @matched_email.notification_text = NotificationTextBuilder.new(@rule, @matched_email,@gmail_account_id).build
   end
 
   private

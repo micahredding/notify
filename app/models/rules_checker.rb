@@ -19,7 +19,7 @@ class RulesChecker
   end
 
   def check_rule rule
-    SingleRuleChecker.new(rule, @email).check
+    SingleRuleChecker.new(rule, @email, @gmail_account.id).check
   end
 
 end

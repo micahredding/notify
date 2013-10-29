@@ -1,7 +1,7 @@
 class NotificationTextBuilder
 
-  def initialize rule, email
-    @rule, @email = rule, email
+  def initialize rule, email , gmail_account_id
+    @rule, @email , @gmail_account_id = rule, email , gmail_account_id
   end
 
   def build
@@ -16,7 +16,7 @@ class NotificationTextBuilder
 
       result = eval("\"" + notification_template + "\"")
     rescue StandardError => ex
-      Rails.logger.error "Failed to build notification text : #{ex.message}"
+      Rails.logger.error "Failed to build notification text for email ##{@email.uid}, gmail account ##{@gmail_account_id} : #{ex.message}"
     end
 
     result

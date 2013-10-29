@@ -9,12 +9,13 @@ describe SingleRuleChecker do
   let(:body2) { "You have been selected for the event" }
   let(:notification_text_builder) { double }
   let(:notification_text) { "Notification text" }
+  let(:gmail_account_id) { 5 }
 
   context "checks" do
 
     before do
       notification_text_builder.stub(:build) { notification_text }
-      NotificationTextBuilder.stub(:new).with(rule, an_instance_of(MatchedEmail)) { notification_text_builder }
+      NotificationTextBuilder.stub(:new).with(rule, an_instance_of(MatchedEmail),gmail_account_id) { notification_text_builder }
     end
 
     context "single part message" do
@@ -27,7 +28,7 @@ describe SingleRuleChecker do
         rule.subject_regex = "^Transaction"
         rule.content_regex = "inform you$"
 
-        matched_email = SingleRuleChecker.new(rule, email).check
+        matched_email = SingleRuleChecker.new(rule, email, gmail_account_id).check
         matched_email.should be_instance_of(MatchedEmail)
         matched_email.m_sender[:name].should eq "mike"
         matched_email.notification_text.should eq notification_text
@@ -37,7 +38,7 @@ describe SingleRuleChecker do
         rule.sender_regex = "(mike|john)@yahoo"
         rule.subject_regex = "(?<operation>^Transaction)"
 
-        matched_email = SingleRuleChecker.new(rule, email).check
+        matched_email = SingleRuleChecker.new(rule, email, gmail_account_id).check
         matched_email.should be_instance_of(MatchedEmail)
         matched_email.m_subject[:operation].should eq "Transaction"
         matched_email.notification_text.should eq notification_text
@@ -48,7 +49,7 @@ describe SingleRuleChecker do
         rule.subject_regex = "^Transaction"
         rule.content_regex = "   "
 
-        matched_email = SingleRuleChecker.new(rule, email).check
+        matched_email = SingleRuleChecker.new(rule, email, gmail_account_id).check
         matched_email.should be_instance_of(MatchedEmail)
         matched_email.notification_text.should eq notification_text
       end
@@ -57,7 +58,7 @@ describe SingleRuleChecker do
         rule.sender_regex = "(mike|john)@yahoo"
         rule.subject_regex = "(important|urgent)"
 
-        SingleRuleChecker.new(rule, email).check.should be_nil
+        SingleRuleChecker.new(rule, email, gmail_account_id).check.should be_nil
       end
 
     end
@@ -73,7 +74,7 @@ describe SingleRuleChecker do
         rule.subject_regex = "^Transaction"
         rule.content_regex = "selected for"
 
-        matched_email = SingleRuleChecker.new(rule, email).check
+        matched_email = SingleRuleChecker.new(rule, email, gmail_account_id).check
         matched_email.should be_instance_of(MatchedEmail)
         matched_email.notification_text.should eq notification_text
       end
@@ -82,7 +83,7 @@ describe SingleRuleChecker do
         rule.sender_regex = "(mike|john)@yahoo"
         rule.subject_regex = "(important|urgent)"
 
-        SingleRuleChecker.new(rule, email).check.should be_nil
+        SingleRuleChecker.new(rule, email, gmail_account_id).check.should be_nil
       end
 
     end
