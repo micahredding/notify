@@ -2,7 +2,7 @@ require 'bundler/capistrano'
 load 'lib/deploy/seed'
 require 'sidekiq/capistrano'
 
-server "notify.zapto.org", :web, :app, :db, primary: true
+server "162.243.77.30", :web, :app, :db, primary: true
 
 set :application, "notify"
 set :user , "deployer"
